@@ -10,15 +10,8 @@ export default registerAs(
     username: process.env.DB_USERNAME || 'postgres',
     password: process.env.DB_PASSWORD || '1234',
     database: process.env.DB_NAME || 'boilerplatenestjs',
-    entities: ['dist/**/**/**/entities/*.entity.js'],
+    entities: [],
     logging: Boolean(process.env.DB_DEBUG) || false,
-    ssl:
-      process.env.NODE_ENV === 'production'
-        ? {
-            requestCert: true,
-            rejectUnauthorized: false,
-            ca: process.env.SSL_CERT,
-          }
-        : false,
+    ssl: false,
   }),
 );
