@@ -13,7 +13,8 @@ const config = {
   password: `${process.env.DB_PASSWORD}`,
   database: `${process.env.DB_NAME}`,
   entities: [Measure],
-  migrations: ['src/**/migrations/*.ts'],
+  // migrations: ['src/**/migrations/*.ts'],
+  migrations: ['dist/**/**/migrations/*.ts'],
   autoLoadEntities: true,
   synchronize: false,
 };

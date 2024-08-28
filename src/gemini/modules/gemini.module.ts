@@ -4,10 +4,11 @@ import { GeminiUseCase } from '../usecases';
 import { GeminiService } from '../services';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Measure } from '../entities';
+import { GeminiRepository } from '../repositories';
 
 @Module({
   controllers: [GeminiController],
   imports: [TypeOrmModule.forFeature([Measure])],
-  providers: [GeminiService, GeminiUseCase],
+  providers: [GeminiService, GeminiUseCase, GeminiRepository],
 })
 export class GeminiModule {}
