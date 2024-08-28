@@ -1,5 +1,5 @@
-import { EMeasureType } from 'src/common/enums';
-import { CustomBaseEntity } from 'src/common/interfaces';
+import { EMeasureType } from '../../common/enums/measure-type.enum';
+import { CustomBaseEntity } from '../../common/interfaces/custom-base.entity';
 import { Column, Entity } from 'typeorm';
 
 @Entity()

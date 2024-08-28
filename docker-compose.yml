@@ -27,7 +27,7 @@ services:
     environment:
       - POSTGRES_PASSWORD=gemini
       - POSTGRES_USER=gemini
-      - POSTGRES_DB=profile_svc_db
+      - POSTGRES_DB=gemini_svc_db
     networks:
       - gemini-network
 networks:

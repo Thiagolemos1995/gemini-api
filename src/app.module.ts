@@ -1,20 +1,24 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import serverConfig from './config/server.config';
 import { GeminiModule } from './gemini/modules';
-import databaseConfig from './config/database.config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import typeorm from './config/typeorm';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       envFilePath: '../.env',
       isGlobal: true,
-      load: [serverConfig],
+      load: [serverConfig, typeorm],
     }),
-    TypeOrmModule.forRoot(databaseConfig()),
+    TypeOrmModule.forRootAsync({
+      inject: [ConfigService],
+      useFactory: async (configService: ConfigService) =>
+        configService.get('typeorm'),
+    }),
     GeminiModule,
   ],
   controllers: [AppController],
