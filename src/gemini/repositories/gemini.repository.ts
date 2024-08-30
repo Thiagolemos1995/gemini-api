@@ -2,6 +2,7 @@ import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { DataSource, EntityManager, QueryRunner } from 'typeorm';
 import { Measure } from '../entities';
 import { MeasureFilterDto, CreateMeasureDto } from '../dtos';
+import { EMeasureType } from 'src/common/enums';
 
 @Injectable()
 export class GeminiRepository {
@@ -35,6 +36,22 @@ export class GeminiRepository {
       return this.entityManager.findOne(Measure, {
         where: { id },
       });
+    } catch (error) {
+      throw new InternalServerErrorException(error);
+    }
+  }
+
+  async fetchByCustomerCode(customerCode: string, measureType: EMeasureType) {
+    try {
+      const measures = await this.entityManager.findBy(Measure, {
+        customer_code: customerCode,
+        measure_type: measureType,
+      });
+
+      return {
+        customer_code: customerCode,
+        measures: measures,
+      };
     } catch (error) {
       throw new InternalServerErrorException(error);
     }

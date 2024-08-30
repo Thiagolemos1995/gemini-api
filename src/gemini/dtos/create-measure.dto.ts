@@ -1,16 +1,15 @@
 import {
-  IsBase64,
   IsDateString,
   IsEnum,
   IsNotEmpty,
+  IsOptional,
   IsUUID,
 } from 'class-validator';
 import { EMeasureType } from 'src/common/enums';
 
 export class CreateMeasureDto {
-  @IsBase64()
-  @IsNotEmpty()
-  image: string;
+  @IsOptional()
+  image: any;
 
   @IsNotEmpty()
   @IsUUID()

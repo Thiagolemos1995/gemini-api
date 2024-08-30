@@ -1,7 +1,11 @@
 import { Module } from '@nestjs/common';
 import { GeminiController } from '../controllers';
-import { GeminiUseCase } from '../usecases';
-import { GeminiService } from '../services';
+import {
+  CreateMeasureUseCase,
+  FetchByCustomerCodeUseCase,
+  FetchMeasuresUseCase,
+} from '../usecases';
+import { GeminiService, GoogleVisionService } from '../services';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Measure } from '../entities';
 import { GeminiRepository } from '../repositories';
@@ -9,6 +13,13 @@ import { GeminiRepository } from '../repositories';
 @Module({
   controllers: [GeminiController],
   imports: [TypeOrmModule.forFeature([Measure])],
-  providers: [GeminiService, GeminiUseCase, GeminiRepository],
+  providers: [
+    GeminiService,
+    GoogleVisionService,
+    FetchMeasuresUseCase,
+    CreateMeasureUseCase,
+    FetchByCustomerCodeUseCase,
+    GeminiRepository,
+  ],
 })
 export class GeminiModule {}
